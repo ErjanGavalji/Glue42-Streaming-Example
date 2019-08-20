@@ -2,7 +2,9 @@ Glue42 Streaming Example
 ==========
 
 # Purpose
-Demonstrate the Streaming Interop Model of Glue42. Included:
+Demonstrate the Streaming Interop Model of Glue42.
+
+Included:
 - Creation of a streaming endpoint
 - Waiting for a streaming endpoint to become available
 - Creation of stream branches
