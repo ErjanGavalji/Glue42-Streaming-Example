@@ -1,0 +1,8 @@
+.vs
+obj
+bin
+Output
+*.user
+*.linkImport
+*.linkImport.sln
+*.nupkg
