@@ -4,6 +4,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29209.62
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{38590355-A51F-482A-9F3E-6D698A56FAD1}"
+	ProjectSection(SolutionItems) = preProject
+		lib\Glue42.2018.2080.0.0.nupkg = lib\Glue42.2018.2080.0.0.nupkg
+		lib\Glue42.dll = lib\Glue42.dll
+		lib\Glue42.pdb = lib\Glue42.pdb
+		lib\Glue42.xml = lib\Glue42.xml
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlueStreamPublisher", "GlueStreamPublisher\GlueStreamPublisher.csproj", "{0DBDABA5-6A17-4C1C-BE78-48903C0549DD}"
 EndProject

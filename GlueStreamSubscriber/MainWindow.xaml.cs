@@ -14,12 +14,12 @@ namespace GlueStreamSubscriber
     /// </summary>
     public partial class MainWindow : Window
     {
-        public enum TickMode
+        public enum StoreDepartment
         {
             None,
-            Slow,
-            Normal,
-            Fast
+            Books,
+            Apparel,
+            Food
         }
 
         private readonly Glue42 glue_;
@@ -48,18 +48,17 @@ namespace GlueStreamSubscriber
                 // is this an instance of the demo stream?
                 IMethod endpoint = args.InteropEndpoint;
 
-                // filter only streaming endpoints called GlueDemoTickStream
-                if (endpoint.Definition.Name != "GlueDemoTickStream" ||
+                // filter only streaming endpoints called GlueDemoStoreStream
+                if (endpoint.Definition.Name != "GlueDemoStoreStream" ||
                     !endpoint.Definition.Flags.HasFlag(MethodFlags.SupportsStreaming))
                 {
                     return;
                 }
 
-                // choose a random tick mode
-                var rndTickMode = (TickMode) random_.Next(Enum.GetValues(typeof(TickMode)).Length - 1);
+                // choose a random StoreDepartment
+                var rndStoreDepartment = (StoreDepartment)random_.Next(Enum.GetValues(typeof(StoreDepartment)).Length - 1);
 
-                LogMessage(
-                    $"{endpoint.Definition.Name} is {args.EndpointStatus} from {endpoint.OriginalServer} - subscribing with {rndTickMode}");
+                LogMessage($@"{endpoint.Definition.Name} is {args.EndpointStatus} from {endpoint.OriginalServer}. Subscribing with {rndStoreDepartment}");
 
                 // reject 1 of every 3
                 bool reject = random_.Next(2) == 0;
@@ -83,11 +82,11 @@ namespace GlueStreamSubscriber
                             })
                     },
                     // these are the arguments sent in the subscription request
-                    mib => mib.SetContext(cb => cb.AddValue("reject", reject).AddValue("tickMode", (int) rndTickMode)),
+                    mib => mib.SetContext(cb => cb.AddValue("reject", reject).AddValue("StoreDepartment", (int)rndStoreDepartment)),
                     // additional settings - specify target await timeout
                     new TargetSettings().WithTargetAwaitTimeout(TimeSpan.FromSeconds(5)),
                     // stream settings, specifying that we accept 'personal' (out-of-band) stream pushes
-                    new ClientEventStreamSettings {AllowCallbacks = true, ReestablishStream = false});
+                    new ClientEventStreamSettings { AllowCallbacks = true, ReestablishStream = false });
             };
         }
 
